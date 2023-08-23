@@ -2,6 +2,7 @@ package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.leilao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +28,7 @@ public class LeilaoController {
         return l != null ? ResponseEntity.ok(l) : ResponseEntity.notFound().build();
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<String> insert(@RequestBody Leilao leilao) {
         LeilaoDTO l = service.insert(leilao);
