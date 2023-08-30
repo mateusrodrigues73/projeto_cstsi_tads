@@ -24,7 +24,7 @@ public class LeilaoController {
 
     @GetMapping("{id}")
     public ResponseEntity<LeilaoDTO> selectById(@PathVariable("id") Long id) {
-        LeilaoDTO l = service.getProdutoById(id);
+        LeilaoDTO l = service.getLeilaoById(id);
         return l != null ? ResponseEntity.ok(l) : ResponseEntity.notFound().build();
     }
 

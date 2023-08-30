@@ -22,7 +22,7 @@ public class LeilaoService {
             .collect(Collectors.toList());
     }
 
-    public LeilaoDTO getProdutoById(Long id) {
+    public LeilaoDTO getLeilaoById(Long id) {
         Optional<Leilao> leilao = rep.findById(id);
         return leilao.map(LeilaoDTO::create).orElse(null);
     }
