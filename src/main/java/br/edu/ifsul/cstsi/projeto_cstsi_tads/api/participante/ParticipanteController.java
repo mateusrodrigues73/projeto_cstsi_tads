@@ -27,7 +27,7 @@ public class ParticipanteController {
         return p != null ? ResponseEntity.ok(p) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<String> insert(@RequestBody Participante participante) {
         ParticipanteDTO p = service.insert(participante);
         URI location = getUri(p.getId());
