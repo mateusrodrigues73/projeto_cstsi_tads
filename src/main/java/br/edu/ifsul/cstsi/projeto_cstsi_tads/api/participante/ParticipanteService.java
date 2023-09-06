@@ -1,6 +1,7 @@
 package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.participante;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
 public class ParticipanteService {
     @Autowired
     private ParticipanteRepository rep;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public List<ParticipanteDTO> getParticipantes() {
         return rep
@@ -28,6 +31,7 @@ public class ParticipanteService {
 
     public ParticipanteDTO insert(Participante participante) {
         Assert.isNull(participante.getId(),"Não foi possível cadastrar sua conta");
+        participante.setSenha(passwordEncoder.encode(participante.getSenha()));
         return ParticipanteDTO.create(rep.save(participante));
     }
 
