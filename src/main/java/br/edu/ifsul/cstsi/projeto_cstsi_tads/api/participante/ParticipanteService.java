@@ -5,9 +5,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 @Service
 public class ParticipanteService {
@@ -32,6 +34,11 @@ public class ParticipanteService {
     public ParticipanteDTO insert(Participante participante) {
         Assert.isNull(participante.getId(),"Não foi possível cadastrar sua conta");
         participante.setSenha(passwordEncoder.encode(participante.getSenha()));
+        Role role = new Role();
+        role.setId(1L);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        participante.setRoles(Arrays.asList(new Role(1L)));
         return ParticipanteDTO.create(rep.save(participante));
     }
 
