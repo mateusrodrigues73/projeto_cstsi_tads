@@ -2,9 +2,11 @@ package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.participante;
 
 import br.edu.ifsul.cstsi.projeto_cstsi_tads.api.lance.Lance;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
@@ -22,11 +24,22 @@ public class Participante implements UserDetails {
     @Id
     @Column(name = "id")
     private Long id;
+    @NotBlank(message= "Campo Nome não pode ser vazio!")
+    @Size(min = 2, max = 50, message = "Nome deve ter entre 2 e 50 caracteres!")
     private String nome;
+    @NotBlank(message= "Campo Login não pode ser vazio!")
+    @Size(min = 2, max = 30, message = "Login deve ter entre 2 e 30 caracteres!")
     private String login;
+    @NotBlank(message = "Campo Senha não pode ser vazio!")
     private String senha;
+    @Email(message = "Email possui formato inválido!")
+    @NotBlank(message = "Campo Email não pode ser vazio!")
     private String email;
+    @NotBlank(message = "Campo Endereço não pode ser vazio!")
+    @Size(max = 100, message = "Endereço deve ter no máximo 100 caracteres!")
     private String endereco;
+    @NotBlank(message = "Campo Telefone não pode ser vazio!")
+    @Size(min = 8, max = 15, message = "Telefone deve ter entre 8 e 15 caracteres!")
     private String telefone;
     @OneToMany(mappedBy = "participante")
     private Collection<Lance> lances;
