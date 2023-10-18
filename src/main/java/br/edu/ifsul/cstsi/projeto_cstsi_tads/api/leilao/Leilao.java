@@ -8,6 +8,7 @@ import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 @Entity
 @Table(name = "leiloes", schema = "projeto_tads_leiloes", catalog = "")
@@ -26,4 +27,9 @@ public class Leilao {
     private Time horaFinal;
     @OneToMany(mappedBy = "leilao")
     private Collection<Item> itens;
+
+    public static Leilao create(LeilaoDTO l){
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(l, Leilao.class);
+    }
 }
