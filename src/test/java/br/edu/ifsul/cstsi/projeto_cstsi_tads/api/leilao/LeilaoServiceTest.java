@@ -5,8 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ class LeilaoServiceTest {
 
     @Test
     void getLeilaoById() throws ParseException {
-        Date dataEsperada = Date.valueOf("2023-06-21");
+        LocalDate dataEsperada = LocalDate.parse("2023-06-21");
         LeilaoDTO l = service.getLeilaoById(1L);
         assertNotNull(l);
         assertEquals(dataEsperada, l.getDataInicio());
@@ -36,13 +37,12 @@ class LeilaoServiceTest {
 
     @Test
     void insert() {
-        // Cria objetos Date e Time para as datas e horas desejadas
-        Date dataInicio = Date.valueOf("2023-10-21");
-        Date dataFinal = Date.valueOf("2023-10-21");
-        Time horaInicio = Time.valueOf("12:00:00");
-        Time horaFinal = Time.valueOf("16:00:00");
+        LocalDate dataInicio = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataFinal = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalTime horaInicio = LocalTime.parse("12:00");
+        LocalTime horaFinal = LocalTime.parse("16:00");
 
-        //cria o leilão para teste
+        //cria o leilao para teste
         Leilao leilao = new Leilao();
         leilao.setDataInicio(dataInicio);
         leilao.setDataFinal(dataFinal);
@@ -78,11 +78,11 @@ class LeilaoServiceTest {
 
     @Test
     void update() {
-        Date newDataInicio = Date.valueOf("2023-10-23");
-        Date newDataFinal = Date.valueOf("2023-10-24");
+        LocalDate newDataInicio = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate newDataFinal = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         LeilaoDTO lDTO = service.getLeilaoById(1L);
-        Date dataInicio = lDTO.getDataInicio();
+        LocalDate dataInicio = lDTO.getDataInicio();
         lDTO.setDataInicio(newDataInicio);
         Leilao l = Leilao.create(lDTO);
         l.setDataFinal(newDataFinal);
@@ -99,13 +99,12 @@ class LeilaoServiceTest {
 
     @Test
     void delete() {
-        // Cria objetos Date e Time para as datas e horas desejadas
-        Date dataInicio = Date.valueOf("2023-10-21");
-        Date dataFinal = Date.valueOf("2023-10-21");
-        Time horaInicio = Time.valueOf("12:00:00");
-        Time horaFinal = Time.valueOf("16:00:00");
+        LocalDate dataInicio = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataFinal = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalTime horaInicio = LocalTime.parse("12:00");
+        LocalTime horaFinal = LocalTime.parse("16:00");
 
-        //cria o leilão para teste
+        //cria o leilao para teste
         Leilao leilao = new Leilao();
         leilao.setDataInicio(dataInicio);
         leilao.setDataFinal(dataFinal);

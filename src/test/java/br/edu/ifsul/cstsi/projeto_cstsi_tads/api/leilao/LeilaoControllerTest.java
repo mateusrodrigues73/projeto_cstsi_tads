@@ -8,8 +8,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,15 +57,12 @@ public class LeilaoControllerTest extends BaseAPITest{
         assertEquals(HttpStatus.NOT_FOUND, getLeilao("/api/v1/leiloes/1000").getStatusCode());
     }
 
-    // TODO: consertar erro da data
-
     @Test
     public void testInsert() {
-        // Cria objetos Date e Time para as datas e horas desejadas
-        Date dataInicio = Date.valueOf("2023-10-21");
-        Date dataFinal = Date.valueOf("2023-10-21");
-        Time horaInicio = Time.valueOf("12:00:00");
-        Time horaFinal = Time.valueOf("16:00:00");
+        LocalDate dataInicio = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataFinal = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalTime horaInicio = LocalTime.parse("12:00");
+        LocalTime horaFinal = LocalTime.parse("16:00");
 
         //cria o leilao para teste
         Leilao leilao = new Leilao();
@@ -98,10 +96,10 @@ public class LeilaoControllerTest extends BaseAPITest{
     @Test
     public void testUpdate() {
         // Cria objetos Date e Time para as datas e horas desejadas
-        Date dataInicio = Date.valueOf("2023-10-21");
-        Date dataFinal = Date.valueOf("2023-10-21");
-        Time horaInicio = Time.valueOf("12:00:00");
-        Time horaFinal = Time.valueOf("16:00:00");
+        LocalDate dataInicio = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataFinal = LocalDate.parse("21/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalTime horaInicio = LocalTime.parse("12:00");
+        LocalTime horaFinal = LocalTime.parse("16:00");
 
         //cria o leilao para teste
         Leilao leilao = new Leilao();
@@ -125,14 +123,14 @@ public class LeilaoControllerTest extends BaseAPITest{
         assertNotNull(l);
         assertEquals(dataInicio, l.getDataInicio());
 
-        //depois altera seu valor
+        // depois altera seu valor
         Leilao la = Leilao.create(l);
-        la.setDataInicio(Date.valueOf("2023-10-11"));
+        la.setDataInicio(LocalDate.parse("25/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         // Update
         response = put("/api/v1/leiloes/" + l.getId(), la, null);
         System.out.println(response);
-        assertEquals(Date.valueOf("2023-10-11"), la.getDataInicio());
+        assertEquals(LocalDate.parse("25/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")), la.getDataInicio());
 
         // Deleta o objeto
         delete(location, null);
@@ -148,7 +146,7 @@ public class LeilaoControllerTest extends BaseAPITest{
 
     @Test
     public void testGetNotFound() {
-        ResponseEntity response = getLeilao("/api/v1/leiloes/1100");
+        ResponseEntity<LeilaoDTO> response = getLeilao("/api/v1/leiloes/1100");
         assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 }

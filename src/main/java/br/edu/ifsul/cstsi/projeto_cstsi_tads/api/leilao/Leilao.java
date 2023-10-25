@@ -2,8 +2,8 @@ package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.leilao;
 
 import br.edu.ifsul.cstsi.projeto_cstsi_tads.api.item.Item;
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,10 +21,10 @@ public class Leilao {
     @Id
     @Column(name = "id")
     private Long id;
-    private Date dataInicio;
-    private Time horaInicio;
-    private Date dataFinal;
-    private Time horaFinal;
+    private LocalDate dataInicio;
+    private LocalTime horaInicio;
+    private LocalDate dataFinal;
+    private LocalTime horaFinal;
     @OneToMany(mappedBy = "leilao")
     private Collection<Item> itens;
 

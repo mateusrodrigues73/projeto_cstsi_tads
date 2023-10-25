@@ -3,16 +3,16 @@ package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.leilao;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 public class LeilaoDTO {
     private Long id;
-    private Date dataInicio;
-    private Time horaInicio;
-    private Date dataFinal;
-    private Time horaFinal;
+    private LocalDate dataInicio;
+    private LocalTime horaInicio;
+    private LocalDate dataFinal;
+    private LocalTime horaFinal;
 
     public static LeilaoDTO create (Leilao l) {
         ModelMapper modelMapper = new ModelMapper();
