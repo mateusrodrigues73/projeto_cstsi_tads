@@ -1,6 +1,6 @@
 package br.edu.ifsul.cstsi.projeto_cstsi_tads.api.leilao;
 
-import br.edu.ifsul.cstsi.projeto_cstsi_tads.api.LeiloesApplication;
+import br.edu.ifsul.cstsi.projeto_cstsi_tads.ProjetoCstsiTadsApplication;
 import br.edu.ifsul.cstsi.projeto_cstsi_tads.api.infra.security.jwt.JwtUtil;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import static junit.framework.TestCase.assertNotNull;
 import static org.springframework.http.HttpMethod.*;
 
-@SpringBootTest(classes = LeiloesApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = ProjetoCstsiTadsApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class BaseAPITest {
     @Autowired
     protected TestRestTemplate rest;
