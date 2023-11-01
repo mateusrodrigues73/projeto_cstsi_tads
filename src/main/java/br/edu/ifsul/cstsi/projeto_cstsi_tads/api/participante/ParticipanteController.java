@@ -12,27 +12,27 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/participantes")
-@Api(value = "Leilões")
+@Api(value = "Participantes")
 public class ParticipanteController {
     @Autowired
     private ParticipanteService service;
 
     @GetMapping
-    @ApiOperation(value = "Retorna todos os leilões cadastrados.")
+    @ApiOperation(value = "Retorna todos os participantes cadastrados.")
     public ResponseEntity<List<ParticipanteDTO>> selectAll() {
         List<ParticipanteDTO> participante = service.getParticipantes();
         return ResponseEntity.ok(participante);
     }
 
     @GetMapping("{id}")
-    @ApiOperation(value = "Retorna um leilão pelo campo identificador.")
+    @ApiOperation(value = "Retorna um participante pelo campo identificador.")
     public ResponseEntity<ParticipanteDTO> selectById(@PathVariable("id") Long id) {
         ParticipanteDTO p = service.getParticipanteById(id);
         return p != null ? ResponseEntity.ok(p) : ResponseEntity.notFound().build();
     }
 
     @PostMapping("/new")
-    @ApiOperation(value = "Insere um novo leilão.")
+    @ApiOperation(value = "Insere um novo participante.")
     public ResponseEntity<String> insert(@RequestBody Participante participante) {
         ParticipanteDTO p = service.insert(participante);
         URI location = getUri(p.getId());
@@ -40,7 +40,7 @@ public class ParticipanteController {
     }
 
     @PutMapping("{id}")
-    @ApiOperation(value = "Altera um leilão existente.")
+    @ApiOperation(value = "Altera um participante existente.")
     public ResponseEntity<ParticipanteDTO> update(@PathVariable("id") Long id, @RequestBody Participante participante) {
         participante.setId(id);
         ParticipanteDTO p = service.update(participante, id);
@@ -49,7 +49,7 @@ public class ParticipanteController {
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation(value = "Deleta um leilão.")
+    @ApiOperation(value = "Deleta um participante.")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
