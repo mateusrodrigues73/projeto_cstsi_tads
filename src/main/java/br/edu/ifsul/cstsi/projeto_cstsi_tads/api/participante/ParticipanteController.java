@@ -12,7 +12,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/participantes")
-@Api(value = "Produtos")
+@Api(value = "Leilões")
 public class ParticipanteController {
     @Autowired
     private ParticipanteService service;
