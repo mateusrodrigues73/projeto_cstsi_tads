@@ -40,7 +40,6 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
             .licenseUrl("https://apache.org")
             .version("1.0")
             .build();
-
     }
 
     @Override
