@@ -49,6 +49,7 @@ public class SecurityConfig {
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/participantes/new").permitAll()
+            .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .csrf().disable()
