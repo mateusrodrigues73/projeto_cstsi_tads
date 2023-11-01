@@ -33,9 +33,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .contact(new Contact("Prof. Vagner Pinto", "", ""))
-            .title("Projeto Exemplo Sobre Spring Boot")
-            .description("Documentação API dos Produtos")
+            .contact(new Contact("Mateus Rodrigues", "", ""))
+            .title("Projeto desenvovido nas aula de Tópicos Avançados em Desenvolvimento de Software")
+            .description("Documentação API dos Leiloes")
             .license("Apache Licence Version 2.0")
             .licenseUrl("https://apache.org")
             .version("1.0")
